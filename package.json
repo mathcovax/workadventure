@@ -19,7 +19,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "rollup-plugin-esbuild": "^6.1.1",
-    "rollup-plugin-dts": "^6.1.0"
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-esbuild": "^6.1.1"
+  },
+  "dependencies": {
+    "@workadventure/scripting-api-extra": "^1.8.1"
   }
 }
