@@ -33,7 +33,7 @@ export default defineConfig({
     },
     plugins: [...getMapsOptimizers(maps, optimizerOptions)],
     server: {
-        host: "localhost",
+        host: "0.0.0.0",
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -41,5 +41,6 @@ export default defineConfig({
             "Cache-Control": "no-cache, no-store, must-revalidate",
         },
         open: "/",
+        port: 1506
     },
 });
