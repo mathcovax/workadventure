@@ -8,7 +8,6 @@ const fastify = Fastify({})
 fastify.register(cors, { 
     origin: /[^]*/
 })
-
 fastify.get("/*", (request, reply) => {
     const url = new URL(`https://${request.url}`)
     if(url.pathname.endsWith(".tmj")){
