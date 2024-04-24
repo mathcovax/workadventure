@@ -1,10 +1,10 @@
-{
+export default {
     "columns":10,
     "image":"_assets_\/piano.png",
-    "name":"piano_tileset",
     "imageheight":128,
     "imagewidth":320,
-    "margin":0, 
+    "margin":0,
+    "name":"piano_tileset",
     "spacing":0,
     "tilecount":10,
     "tileheight":128,
@@ -51,8 +51,7 @@
                 {
                     "duration":100,
                     "tileid":9
-                },
-            ],
+                }],
             "id":0
         }
     ]

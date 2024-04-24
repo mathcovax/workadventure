@@ -5,7 +5,6 @@ export function animatedTileset(tileset){
         {
             ...pianoTile,
             firstgid: tileset.firstgid + tileset.tilecount,
-            name: "piano_tileset",
         }
     ]
 }
