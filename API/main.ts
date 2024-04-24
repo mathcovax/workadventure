@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors'
 import {readFile} from "fs/promises";
+import {createReadStream} from "fs";
 
 const fastify = Fastify({})
 
@@ -45,11 +46,10 @@ fastify.get("/*", (request, reply) => {
                 ...lastTileset,
                 firstgid: lastTileset.firstgid + lastTileset.tilecount,
                 tilecount: 8,
-                image: "",
+                image: "_assets_/piano.png",
             }
 
-            const scriptProp = map.properties.find(v => v.name === "script")
-            scriptProp.value
+            map.tilesets.push(cloneTileset)
     
             reply.send(map)
         })
@@ -59,49 +59,62 @@ fastify.get("/*", (request, reply) => {
         })
     }
     else if(url.pathname.endsWith(".png")){
-        fetch(
-            url.href,
-            {
-                method: "GET",
-                headers: {
-                    ...request.headers as Record<string, string>,
-                    host: url.host
-                },
-                redirect: "follow",
-            }
-        )
-        .then(response => {
-            const headers = {};
-            response.headers.forEach((value, key) => {
-                headers[key] = value;
-            });
-    
-            reply.raw.writeHead(response.status, headers)
-    
-            const reader = response.body?.getReader()
-            if(reader){
-                reader.read().then(function pump({done, value}){
-                    if(value){
-                        reply.raw.write(value);
-                    }
-        
-                    if(!done){
-                        reader.read().then(pump);
-                    }
-                    else {
-                        reply.raw.end();
-                    }
-                })
+        if(url.pathname.includes("_assets_")){
+            const assetPath = url.pathname.split("/_assets_/")[1];
+            if(/(\/•.\.)|(\.\.\/)/.test(assetPath)){
+                reply.code(500).send("bad asset path");
             }
             else {
-                reply.raw.end();
+                const stream = createReadStream(`assets/${assetPath}`)
+                reply.code(200).send(stream)
             }
-    
-        })
-        .catch((error) => {
-            console.log(error);
-            reply.code(500).send(error)
-        })
+            
+        }
+        else {
+            fetch(
+                url.href,
+                {
+                    method: "GET",
+                    headers: {
+                        ...request.headers as Record<string, string>,
+                        host: url.host
+                    },
+                    redirect: "follow",
+                }
+            )
+            .then(response => {
+                const headers = {};
+                response.headers.forEach((value, key) => {
+                    headers[key] = value;
+                });
+        
+                reply.raw.writeHead(response.status, headers)
+        
+                const reader = response.body?.getReader()
+                if(reader){
+                    reader.read().then(function pump({done, value}){
+                        if(value){
+                            reply.raw.write(value);
+                        }
+            
+                        if(!done){
+                            reader.read().then(pump);
+                        }
+                        else {
+                            reply.raw.end();
+                        }
+                    })
+                }
+                else {
+                    reply.raw.end();
+                }
+        
+            })
+            .catch((error) => {
+                console.log(error);
+                reply.code(500).send(error)
+            })
+        }
     }
     else if(url.pathname.endsWith(".js")){
         readFile("../dist/main.mjs", "utf-8").then(scriptContent => {
