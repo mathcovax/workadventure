@@ -1,4 +1,4 @@
-export default {
+{
     "columns":10,
     "image":"__assets__\/piano.png",
     "imageheight":128,
