@@ -14,7 +14,7 @@
     "API"
   ],
   "scripts": {
-    "dev": "rollup --config --watch & npm -w test run dev & npm -w API run dev"
+    "dev": "rollup --config --watch & npm -w API run dev"
   },
   "keywords": [],
   "author": "",

@@ -1,8 +1,6 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors'
-import {readFileSync} from "fs"
-
-const scriptContent = readFileSync("../dist/main.mjs", "utf-8");
+import {readFile} from "fs/promises";
 
 const fastify = Fastify({})
 
@@ -106,7 +104,13 @@ fastify.get("/*", (request, reply) => {
         })
     }
     else if(url.pathname.endsWith(".js")){
-        reply.header("content-type", "application/javascript").send(`import "${url.href}";\n\n${scriptContent}`)
+        readFile("../dist/main.mjs", "utf-8").then(scriptContent => {
+            reply.header("content-type", "application/javascript").send(`import "${url.href}";\n\n${scriptContent}`)
+        })
+        .catch((error) => {
+            console.log(error);
+            reply.code(500).send(error)
+        })
     }
 })
 
