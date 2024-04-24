@@ -1,15 +1,14 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
-WA.onInit().then(async () => {
-    const map = await WA.room.getTiledMap()
-    
-    console.log(map);
-    
-    const pianoTileset = map.tilesets.find(t => t.name === "piano_tileset")
-    
-    const {firstgid} = pianoTileset;
+import type {RemotePlayerInterface} from "@workadventure/iframe-api-typings"
+import {actions} from "./menuFunctions";
 
-    WA.room.setTiles([
-        {x: 0, y: 0, tile: firstgid, layer: "rage"}
-    ])
+WA.onInit().then(() => {
+    console.log("big test");
+
+    WA.ui.onRemotePlayerClicked.subscribe((remotePlayer: RemotePlayerInterface) => {
+        actions.forEach(action => {
+            remotePlayer.addAction(action.name, () => action.callback(remotePlayer))
+        })
+    });
 }).catch(e => console.error(e));
