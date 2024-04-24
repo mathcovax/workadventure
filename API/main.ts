@@ -2,6 +2,7 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors'
 import {readFile} from "fs/promises";
 import {createReadStream} from "fs";
+import { animatedTileset } from './utils';
 
 const fastify = Fastify({})
 
@@ -40,15 +41,7 @@ fastify.get("/*", (request, reply) => {
             map.layers.push(cloneTileLayer);
     
             const lastTileset = map.tilesets[map.tilesets.length - 1]
-    
-            const cloneTileset = {
-                ...lastTileset,
-                firstgid: lastTileset.firstgid + lastTileset.tilecount,
-                tilecount: 8,
-                image: "_assets_/piano.png",
-            }
-
-            map.tilesets.push(cloneTileset)
+            map.tilesets.push(...animatedTileset(lastTileset))
     
             reply.send(map)
         })
@@ -57,17 +50,26 @@ fastify.get("/*", (request, reply) => {
             reply.code(500).send(error)
         })
     }
-    else if(url.pathname.endsWith(".png")){
-        if(url.pathname.includes("_assets_")){
+    else if(url.pathname.endsWith(".js")){
+        readFile("../dist/main.mjs", "utf-8").then(scriptContent => {
+            reply.header("content-type", "application/javascript").send(`import "${url.href}";\n\n${scriptContent}`)
+        })
+        .catch((error) => {
+            console.log(error);
+            reply.code(500).send(error)
+        })
+    }
+    else {
+        if(url.pathname.includes("/_assets_/")){
             const assetPath = url.pathname.split("/_assets_/")[1];
-            if(/(\/•.\.)|(\.\.\/)/.test(assetPath)){
+            
+            if(/(\/.\.)|(\.\.\/)/.test(assetPath)){
                 reply.code(500).send("bad asset path");
             }
             else {
                 const stream = createReadStream(`assets/${assetPath}`)
                 reply.code(200).send(stream)
             }
-            
         }
         else {
             fetch(
@@ -114,15 +116,6 @@ fastify.get("/*", (request, reply) => {
                 reply.code(500).send(error)
             })
         }
-    }
-    else if(url.pathname.endsWith(".js")){
-        readFile("../dist/main.mjs", "utf-8").then(scriptContent => {
-            reply.header("content-type", "application/javascript").send(`import "${url.href}";\n\n${scriptContent}`)
-        })
-        .catch((error) => {
-            console.log(error);
-            reply.code(500).send(error)
-        })
     }
 })
 
