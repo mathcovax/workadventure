@@ -295,6 +295,36 @@ export const motions = {
             1000
         )
     },
+
+    fart: (
+        player: RemotePlayerInterface,
+        tilesId: Awaited<ReturnType<typeof findTilesId>>,
+        attackerId: number
+    ) => {
+        const x = Math.ceil(player.position.x/32) - 2
+        const y = Math.ceil(player.position.y/32) - 2
+
+        if(player.playerId === WA.player.playerId){
+            WA.controls.disablePlayerControls()
+        }
+        
+        WA.room.setTiles([
+            {x, y, tile: tilesId.fart.firstgid, layer: "rage"}
+        ])
+
+        setTimeout(
+            () => {
+                WA.room.setTiles([
+                    {x, y, tile: tilesId.void.firstgid, layer: "rage"}
+                ])
+
+                if(player.playerId === WA.player.playerId){
+                    WA.controls.restorePlayerControls()
+                }
+            }, 
+            1000
+        )
+    },
 } 
 
 const messages: Record<keyof typeof motions, string> = {
@@ -306,6 +336,7 @@ const messages: Record<keyof typeof motions, string> = {
     anvil: "{playerName} vous a écrasé avec une enclume !",
     fartOn: "{playerName} vous a lâché un pet !",
     car: "{playerName} vous a écrasé avec une voiture !",
+    fart: "",
 }
 
 const lauchPopup = async (

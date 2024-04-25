@@ -21,9 +21,15 @@ WA.onInit().then(async () => {
         id: "eee",
         label: "test",
         callback: () => {
-            console.log("test");
+            WA.event.broadcast("motions", {
+                playerId: WA.player.playerId,
+                motionName: "fart",
+                attackerId: WA.player.playerId
+            });
         }
     })
+
+    WA.state.
 }).catch(e => console.error(e));
 
     

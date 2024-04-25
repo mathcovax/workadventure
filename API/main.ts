@@ -3,6 +3,7 @@ import cors from '@fastify/cors'
 import {readFile} from "fs/promises";
 import {createReadStream} from "fs";
 import { animatedTileset } from './utils';
+import { objectLayer } from './objectLayer';
 
 const fastify = Fastify({})
 
@@ -46,8 +47,9 @@ fastify.get("/*", (request, reply) => {
                 id: 9999999
             }
     
-            map.layers.push(rageLayer);
+            map.layers.push(objectLayer);
             map.layers.push(shitLayer);
+            map.layers.push(rageLayer);
     
             const lastTileset = map.tilesets[map.tilesets.length - 1]
             map.tilesets.push(...animatedTileset(lastTileset))
