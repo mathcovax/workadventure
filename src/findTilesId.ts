@@ -21,8 +21,9 @@ export async function findTilesId(){
     const explosion: Tileset = map.tilesets.find(tileset => tileset.name === "explosion")
     const lightning: Tileset = map.tilesets.find(tileset => tileset.name === "lightning")
     const punchMachine: Tileset = map.tilesets.find(tileset => tileset.name === "punch_machine")
+    const enclume: Tileset = map.tilesets.find(tileset => tileset.name === "enclume")
 
-    if(!piano || !_void || !explosion || !lightning || !punchMachine){
+    if(!piano || !_void || !explosion || !lightning || !punchMachine || !enclume){
         throw new Error("tileId not found");
     }
 
@@ -31,6 +32,7 @@ export async function findTilesId(){
         void: _void,
         explosion,
         lightning,
-        punchMachine
+        punchMachine,
+        enclume
     }
 }

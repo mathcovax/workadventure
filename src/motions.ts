@@ -128,5 +128,30 @@ export const motions = {
             }, 
             1000
         )
+    },
+
+    enclume: (
+        player: RemotePlayerInterface,
+        tilesId: Awaited<ReturnType<typeof findTilesId>>
+    ) => {
+        const x = Math.ceil(player.position.x/32) - 1
+        const y = Math.ceil(player.position.y/32) - 3
+
+        if(player.playerId === WA.player.playerId){
+            WA.controls.disablePlayerControls()
+        }
+
+        WA.room.setTiles([
+            {x, y, tile: tilesId.enclume.firstgid, layer: "rage"}
+        ])
+
+        setTimeout(
+            () => {
+                WA.room.setTiles([
+                    {x, y, tile: tilesId.void.firstgid, layer: "rage"}
+                ])
+            },
+            1000
+        )
     }
 } 

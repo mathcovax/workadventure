@@ -37,7 +37,10 @@ export const actions: Action[] = [
     {
         name: 'Enclume !',
         callback: (remotePlayer) => {
-            
+            WA.event.broadcast("motions", {
+                playerId: remotePlayer.playerId,
+                motionName: "enclume",
+            });
         }
     },
     {

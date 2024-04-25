@@ -3,6 +3,7 @@ import voidTile from "./tiles/void.tile";
 import explosionTile from "./tiles/explosion.tile";
 import lightning from "./tiles/lightning";
 import punchMachineTile from "./tiles/punch_machine.tile";
+import enclumeTile from "./tiles/enclume.tile";
 
 export function animatedTileset(tileset){
     let firstgid = tileset.firstgid + tileset.tilecount
@@ -26,6 +27,10 @@ export function animatedTileset(tileset){
         {
             ...punchMachineTile,
             firstgid: firstgid += lightning.tilecount,
+        },
+        {
+            ...enclumeTile,
+            firstgid: firstgid += punchMachineTile.tilecount,
         }
     ]
 }
