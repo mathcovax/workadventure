@@ -47,6 +47,7 @@ export const motions = {
             500
         )
     },
+
     explotion: (
         player: RemotePlayerInterface, 
         tilesId: Awaited<ReturnType<typeof findTilesId>>
@@ -54,6 +55,10 @@ export const motions = {
         const x = Math.ceil(player.position.x/32) - 2
         const y = Math.ceil(player.position.y/32) - 5
         
+        if(player.playerId === WA.player.playerId){
+            WA.controls.disablePlayerControls()
+        }
+
         WA.room.setTiles([
             {x, y, tile: tilesId.explosion.firstgid, layer: "rage"}
         ])
@@ -63,6 +68,10 @@ export const motions = {
                 WA.room.setTiles([
                     {x, y, tile: tilesId.void.firstgid, layer: "rage"}
                 ])
+
+                if(player.playerId === WA.player.playerId){
+                    WA.controls.restorePlayerControls()
+                }
             }, 
             1000
         )
