@@ -29,7 +29,7 @@ WA.onInit().then(async () => {
         }
     })
 
-    WA.state.
+    WA.state
 }).catch(e => console.error(e));
 
     
