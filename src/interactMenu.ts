@@ -51,6 +51,15 @@ export const actions: Action[] = [
                 motionName: "lightning",
             });
         }
+    },
+    {
+        name: 'Boule de feu ! 🔥',
+        callback: (remotePlayer) => {
+            WA.event.broadcast("motions", {
+                playerId: remotePlayer.playerId,
+                motionName: "fireball",
+            });
+        }
     }
 
 ]

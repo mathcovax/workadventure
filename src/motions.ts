@@ -105,8 +105,9 @@ export const motions = {
             1000
         )
     },
+
     punchMachine: (
-        player: RemotePlayerInterface, 
+        player: RemotePlayerInterface,
         tilesId: Awaited<ReturnType<typeof findTilesId>>
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
@@ -118,6 +119,31 @@ export const motions = {
         
         WA.room.setTiles([
             {x, y, tile: tilesId.punchMachine.firstgid, layer: "rage"}
+        ])
+
+        setTimeout(
+            () => {
+                WA.room.setTiles([
+                    {x, y, tile: tilesId.void.firstgid, layer: "rage"}
+                ])
+            }, 
+            1000
+        )
+    },
+
+    fireball: (
+        player: RemotePlayerInterface,
+        tilesId: Awaited<ReturnType<typeof findTilesId>>
+    ) => {
+        const x = Math.ceil(player.position.x/32) - 1
+        const y = Math.ceil(player.position.y/32) - 3
+
+        if(player.playerId === WA.player.playerId){
+            WA.controls.disablePlayerControls()
+        }
+        
+        WA.room.setTiles([
+            {x, y, tile: tilesId.fireball.firstgid, layer: "rage"}
         ])
 
         setTimeout(

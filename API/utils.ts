@@ -1,8 +1,9 @@
 import pianoTile from "./tiles/piano.tile";
 import voidTile from "./tiles/void.tile";
 import explosionTile from "./tiles/explosion.tile";
-import lightning from "./tiles/lightning";
+import lightningTile from "./tiles/lightning.tile";
 import punchMachineTile from "./tiles/punch_machine.tile";
+import fireballTile from "./tiles/fireball.tile";
 import enclumeTile from "./tiles/enclume.tile";
 
 export function animatedTileset(tileset){
@@ -21,16 +22,20 @@ export function animatedTileset(tileset){
             firstgid: firstgid += voidTile.tilecount,
         },
         {
-            ...lightning,
+            ...lightningTile,
             firstgid: firstgid += explosionTile.tilecount,
         },
         {
             ...punchMachineTile,
-            firstgid: firstgid += lightning.tilecount,
+            firstgid: firstgid += lightningTile.tilecount,
+        },
+        {
+            ...fireballTile,
+            firstgid: firstgid += punchMachineTile.tilecount
         },
         {
             ...enclumeTile,
-            firstgid: firstgid += punchMachineTile.tilecount,
+            firstgid: firstgid += fireballTile.tilecount,
         }
     ]
 }
