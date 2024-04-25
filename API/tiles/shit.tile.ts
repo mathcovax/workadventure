@@ -13,11 +13,11 @@ export default {
         {
             "animation":[
                 {
-                    "duration":100,
+                    "duration":300,
                     "tileid":0
                 },
                 {
-                    "duration":100,
+                    "duration":300,
                     "tileid":1
                 },
             ],

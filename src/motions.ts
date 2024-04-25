@@ -1,5 +1,5 @@
 import type {RemotePlayerInterface} from "@workadventure/iframe-api-typings"
-import { findTilesId } from "./findTilesId"
+import { findTilesId } from "./findTileset"
 
 interface DataSubscribeMotion {
     playerId: number

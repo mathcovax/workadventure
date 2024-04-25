@@ -2,7 +2,7 @@
 
 import type {RemotePlayerInterface} from "@workadventure/iframe-api-typings"
 import {actions} from "./interactMenu";
-import { findTilesId } from "./findTilesId";
+import { findTilesId } from "./findTileset";
 import { subscribeMotion } from "./motions";
 
 WA.onInit().then(async () => {
