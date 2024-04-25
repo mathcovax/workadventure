@@ -34,6 +34,34 @@ export const objectLayer = {
             width: 0,
             x: 0,
             y: 0
+        },
+        {
+            height: 0,
+            id: 1,
+            name: "doomMode",
+            properties:[
+                    {
+                        name: "default",
+                        type:"boolean",
+                        value:false
+                    },
+                    {
+                        name:"readableBy",
+                        type:"object",
+                        value:"admin"
+                    }, 
+                    {
+                        name:"writableBy",
+                        type:"object",
+                        value:"admin"
+                    }
+            ],
+            rotation:0,
+            type: "variable",
+            visible:true,
+            width: 0,
+            x: 0,
+            y: 0
         }, 
     ]
 }
