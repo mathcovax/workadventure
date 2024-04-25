@@ -16,6 +16,14 @@ WA.onInit().then(async () => {
     });
 
     WA.event.on("motions").subscribe(({data}) => subscribeMotion(data as any, tilesId))
+
+    WA.ui.actionBar.addButton({
+        id: "eee",
+        label: "test",
+        callback: () => {
+            console.log("test");
+        }
+    })
 }).catch(e => console.error(e));
 
     

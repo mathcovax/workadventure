@@ -30,19 +30,36 @@ fastify.get("/*", (request, reply) => {
                 throw new Error("No base found");
             }
     
-            const cloneTileLayer = {
+            const rageLayer = {
                 ...baseTileLayer,
                 data: baseTileLayer.data.map(() => 0),
                 visible: true,
                 name: "rage",
                 id: 9999999
             }
+
+            const shitLayer = {
+                ...baseTileLayer,
+                data: rageLayer.data,
+                visible: true,
+                name: "shit",
+                id: 9999999
+            }
     
-            map.layers.push(cloneTileLayer);
+            map.layers.push(rageLayer);
+            map.layers.push(shitLayer);
     
             const lastTileset = map.tilesets[map.tilesets.length - 1]
             map.tilesets.push(...animatedTileset(lastTileset))
-    
+            
+            const property = map.properties.find(p => p.name === "script");
+            
+            if(!property) {
+                throw new Error("Script property not found");
+            }
+
+            property.value = property.value.replace(/\.js$/, "__main-script.js")
+            
             reply.send(map)
         })
         .catch((error) => {
@@ -50,9 +67,12 @@ fastify.get("/*", (request, reply) => {
             reply.code(500).send(error)
         })
     }
-    else if(url.pathname.endsWith(".js")){
-        readFile("../dist/main.mjs", "utf-8").then(scriptContent => {
-            reply.header("content-type", "application/javascript").send(`import "${url.href}";\n\n${scriptContent}`)
+    else if(url.pathname.endsWith("__main-script.js")){
+        readFile("../dist/main.mjs", "utf-8")
+        .then(scriptContent => {
+            reply
+            .header("content-type", "application/javascript")
+            .send(`import "${url.href.replace(/__main-script\.js$/, ".js")}";\n\n${scriptContent}`)
         })
         .catch((error) => {
             console.log(error);

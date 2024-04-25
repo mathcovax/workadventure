@@ -1,0 +1,26 @@
+export default {
+    "columns":2,
+    "image":"_assets_\/shit.png",
+    "imageheight":64,
+    "imagewidth":64,
+    "margin":0,
+    "name":"shit",
+    "spacing":0,
+    "tilecount":2,
+    "tileheight":64,
+    "tilewidth":32,
+    "tiles":[
+        {
+            "animation":[
+                {
+                    "duration":100,
+                    "tileid":0
+                },
+                {
+                    "duration":100,
+                    "tileid":1
+                },
+            ],
+            "id":0
+        }]
+}
