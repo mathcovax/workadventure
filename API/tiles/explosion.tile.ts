@@ -1,14 +1,14 @@
 export default {
-    "columns":10,
-    "image":"_assets_\/piano.png",
-    "imageheight":128,
-    "imagewidth":320,
+    "columns":17,
+    "image":"_assets_\/explosion.png",
+    "imageheight":160,
+    "imagewidth":1632,
     "margin":0,
-    "name":"piano",
+    "name":"explosion",
     "spacing":0,
-    "tilecount":10,
-    "tileheight":128,
-    "tilewidth":32,
+    "tilecount":17,
+    "tileheight":160,
+    "tilewidth":96,
     "tiles":[
         {
             "animation":[
@@ -51,7 +51,36 @@ export default {
                 {
                     "duration":100,
                     "tileid":9
-                }],
+                },
+                {
+                    "duration":100,
+                    "tileid":10
+                },
+                {
+                    "duration":100,
+                    "tileid":11
+                },
+                {
+                    "duration":100,
+                    "tileid":12
+                },
+                {
+                    "duration":100,
+                    "tileid":13
+                },
+                {
+                    "duration":100,
+                    "tileid":14
+                },
+                {
+                    "duration":100,
+                    "tileid":15
+                },
+                {
+                    "duration":100,
+                    "tileid":16
+                }
+            ],
             "id":0
         }]
 }

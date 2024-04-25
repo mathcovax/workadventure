@@ -1,11 +1,21 @@
 import pianoTile from "./tiles/piano.tile";
+import voidTile from "./tiles/void.tile";
+import explosionTile from "./tiles/explosion.tile";
 
-export function animated_tileset(tileset){
-    let nextfirstgid = tileset.firstgid + tileset.tilecount;
+export function animatedTileset(tileset){
+    let firstgid = tileset.firstgid + tileset.tilecount
     return [
         {
             ...pianoTile,
-            firstgid: nextfirstgid
-        }
+            firstgid,
+        },
+        {
+            ...voidTile,
+            firstgid: firstgid += pianoTile.tilecount,
+        },
+        {
+            ...explosionTile,
+            firstgid: firstgid += voidTile.tilecount,
+        },
     ]
 }
