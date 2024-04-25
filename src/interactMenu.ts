@@ -1,5 +1,5 @@
 import type {RemotePlayerInterface} from "@workadventure/iframe-api-typings"
-import { findTilesId } from "./findTilesId"
+import {findTilesId } from "./findTilesId"
 
 interface Action {
     name: string

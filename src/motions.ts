@@ -28,7 +28,7 @@ export const motions = {
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 4
-        
+
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
@@ -233,12 +233,15 @@ export const motions = {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 1
 
+        const sound = WA.sound.loadSound("_assets_/fart.mp3")
+
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
                 attackerId,
                 "fartOn"
             )
+            sound.play({})
         }
         
         WA.room.setTiles([

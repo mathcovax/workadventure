@@ -13,6 +13,19 @@ interface Tileset {
     firstgid: number
 }
 
+export async function loadSounds(){
+    const fart = await WA.sound.loadSound("_assets_/fart.mp3")
+
+    if(!fart){
+        throw new Error("sound not found")
+    }
+
+    return {
+        fart
+    }
+
+}
+
 export async function findTilesId(){
     const map = await WA.room.getTiledMap()
 
