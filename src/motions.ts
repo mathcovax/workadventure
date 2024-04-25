@@ -226,6 +226,10 @@ export const motions = {
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
+            lauchPopup(
+                WA.player.name,
+                "fartOn"
+            )
         }
         
         WA.room.setTiles([
@@ -255,6 +259,10 @@ export const motions = {
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
+            lauchPopup(
+                WA.player.name,
+                "car"
+            )
         }
         
         WA.room.setTiles([
@@ -275,7 +283,6 @@ export const motions = {
         )
     },
 } 
-}
 
 const messages: Record<keyof typeof motions, string> = {
     piano: "{playerName} vous à jeté un piano !",
@@ -284,6 +291,8 @@ const messages: Record<keyof typeof motions, string> = {
     punchMachine: "{playerName} vous à frappé !",
     fireball: "{playerName} vous à brûlé !",
     anvil: "{playerName} vous à écrasé avec une enclume !",
+    fartOn: "{playerName} vous à lâché un pet !",
+    car: "{playerName} vous à écrasé avec une voiture !",
 }
 
 const lauchPopup = async (
