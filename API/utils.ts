@@ -9,6 +9,7 @@ import fartOnTile from "./tiles/fart_on.tile";
 import carTile from "./tiles/car.tile";
 import shitTile from "./tiles/shit.tile";
 import fartTile from "./tiles/fart.tile";
+import bloodsTile from "./tiles/bloods.tile";
 
 export function animatedTileset(tileset){
     let firstgid = tileset.firstgid + tileset.tilecount
@@ -57,5 +58,9 @@ export function animatedTileset(tileset){
             ...fartTile,
             firstgid: firstgid += shitTile.tilecount,
         },
+        {
+            ...bloodsTile,
+            firstgid: firstgid += fartTile.tilecount,
+        }
     ]
 }

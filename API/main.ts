@@ -30,6 +30,9 @@ fastify.get("/*", (request, reply) => {
             if(!baseTileLayer) {
                 throw new Error("No base found");
             }
+
+            const lastTileset = map.tilesets[map.tilesets.length - 1]
+            map.tilesets.push(...animatedTileset(lastTileset))
     
             const rageLayer = {
                 ...baseTileLayer,
@@ -46,13 +49,28 @@ fastify.get("/*", (request, reply) => {
                 name: "shits",
                 id: 9999999
             }
+            
+            const bloodLayer = {
+                ...baseTileLayer,
+                data: baseTileLayer.data.map(
+                    (value,index) => {
+                        let randomInt = Math.random();
+                        if (randomInt < 0.1) {
+                            const lastTileset = map.tilesets[map.tilesets.length - 1]
+                            return lastTileset.firstgid + index%4;
+                        }       
+                        return 0;
+                    }
+                ),
+                visible: false,
+                name: "doom",
+                id: 9999999
+            }
     
             map.layers.push(objectLayer);
             map.layers.push(shitsLayer);
             map.layers.push(rageLayer);
-    
-            const lastTileset = map.tilesets[map.tilesets.length - 1]
-            map.tilesets.push(...animatedTileset(lastTileset))
+            map.layers.push(bloodLayer);
             
             const property = map.properties.find(p => p.name === "script");
             

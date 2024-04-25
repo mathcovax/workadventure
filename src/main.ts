@@ -7,13 +7,8 @@ import { subscribeMotion } from "./motions";
 import { initShit } from "./shit";
 
 WA.onInit().then(async () => {
-    WA.controls.disablePlayerControls()
-    const tilesId = await findTilesId();
-    if(WA.state.shits === 0){
-        await WA.state.saveVariable("shits", [])
-    }
+    const tilesId = await findTilesId(); 
     await WA.players.configureTracking();
-    WA.controls.restorePlayerControls()
 
     WA.ui.onRemotePlayerClicked.subscribe((remotePlayer: RemotePlayerInterface) => {
         actions.forEach(action => {
@@ -25,7 +20,7 @@ WA.onInit().then(async () => {
 
     WA.ui.actionBar.addButton({
         id: "eee",
-        label: "laché une quaise",
+        label: "test",
         callback: async () => {
             WA.event.broadcast("motions", {
                 playerId: WA.player.playerId,
