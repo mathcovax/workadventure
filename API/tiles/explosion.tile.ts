@@ -6,7 +6,7 @@ export default {
     "margin":0,
     "name":"explosion",
     "spacing":0,
-    "tilecount":10,
+    "tilecount":17,
     "tileheight":160,
     "tilewidth":96,
     "tiles":[
