@@ -4,9 +4,10 @@ import { findTilesId } from "./findTilesId"
 interface DataSubscribeMotion {
     playerId: number
     motionName: keyof typeof motions
+    attackerId: number
 }
 
-export const subscribeMotion = async ({playerId, motionName}: DataSubscribeMotion, tilesId: Awaited<ReturnType<typeof findTilesId>>) => {
+export const subscribeMotion = async ({playerId, motionName, attackerId}: DataSubscribeMotion, tilesId: Awaited<ReturnType<typeof findTilesId>>) => {
     motions[motionName](
         playerId === WA.player.playerId 
             ? {
@@ -14,14 +15,16 @@ export const subscribeMotion = async ({playerId, motionName}: DataSubscribeMotio
                 playerId,
             }
             : WA.players.get(playerId) as any, 
-        tilesId
+        tilesId,
+        attackerId
     )
 }
 
 export const motions = {
     piano: (
         player: RemotePlayerInterface, 
-        tilesId: Awaited<ReturnType<typeof findTilesId>>
+        tilesId: Awaited<ReturnType<typeof findTilesId>>,
+        attackerId: number
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 4
@@ -29,7 +32,7 @@ export const motions = {
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
-                WA.player.name,
+                attackerId,
                 "piano"
             )
         }
@@ -54,7 +57,8 @@ export const motions = {
 
     explosion: (
         player: RemotePlayerInterface, 
-        tilesId: Awaited<ReturnType<typeof findTilesId>>
+        tilesId: Awaited<ReturnType<typeof findTilesId>>,
+        attackerId: number
     ) => {
         const x = Math.ceil(player.position.x/32) - 2
         const y = Math.ceil(player.position.y/32) - 5
@@ -62,7 +66,7 @@ export const motions = {
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
-                WA.player.name,
+                attackerId,
                 "explosion"
             )
         }
@@ -87,7 +91,8 @@ export const motions = {
 
     lightning: (
         player: RemotePlayerInterface,
-        tilesId: Awaited<ReturnType<typeof findTilesId>>
+        tilesId: Awaited<ReturnType<typeof findTilesId>>,
+        attackerId: number
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 3
@@ -95,7 +100,7 @@ export const motions = {
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
-                WA.player.name,
+                attackerId,
                 "lightning"
             )
         }
@@ -120,7 +125,8 @@ export const motions = {
 
     punchMachine: (
         player: RemotePlayerInterface,
-        tilesId: Awaited<ReturnType<typeof findTilesId>>
+        tilesId: Awaited<ReturnType<typeof findTilesId>>,
+        attackerId: number
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 1
@@ -128,7 +134,7 @@ export const motions = {
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
-                WA.player.name,
+                attackerId,
                 "punchMachine"
             )
         }
@@ -153,7 +159,8 @@ export const motions = {
 
     fireball: (
         player: RemotePlayerInterface,
-        tilesId: Awaited<ReturnType<typeof findTilesId>>
+        tilesId: Awaited<ReturnType<typeof findTilesId>>,
+        attackerId: number
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 3
@@ -161,7 +168,7 @@ export const motions = {
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
-                WA.player.name,
+                attackerId,
                 "fireball"
             )
         }
@@ -186,7 +193,8 @@ export const motions = {
 
     anvil: (
         player: RemotePlayerInterface,
-        tilesId: Awaited<ReturnType<typeof findTilesId>>
+        tilesId: Awaited<ReturnType<typeof findTilesId>>,
+        attackerId: number
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 3
@@ -194,7 +202,7 @@ export const motions = {
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
-                WA.player.name,
+                attackerId,
                 "anvil"
             )
         }
@@ -219,7 +227,8 @@ export const motions = {
 
     fartOn: (
         player: RemotePlayerInterface,
-        tilesId: Awaited<ReturnType<typeof findTilesId>>
+        tilesId: Awaited<ReturnType<typeof findTilesId>>,
+        attackerId: number
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 1
@@ -227,7 +236,7 @@ export const motions = {
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
-                WA.player.name,
+                attackerId,
                 "fartOn"
             )
         }
@@ -252,7 +261,8 @@ export const motions = {
 
     car: (
         player: RemotePlayerInterface,
-        tilesId: Awaited<ReturnType<typeof findTilesId>>
+        tilesId: Awaited<ReturnType<typeof findTilesId>>,
+        attackerId: number
     ) => {
         const x = Math.ceil(player.position.x/32) - 2
         const y = Math.ceil(player.position.y/32) - 5
@@ -260,7 +270,7 @@ export const motions = {
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
-                WA.player.name,
+                attackerId,
                 "car"
             )
         }
@@ -285,22 +295,24 @@ export const motions = {
 } 
 
 const messages: Record<keyof typeof motions, string> = {
-    piano: "{playerName} vous à jeté un piano !",
-    explosion: "{playerName} vous à fait explosé !",
-    lightning: "{playerName} vous à foudroyé !",
-    punchMachine: "{playerName} vous à frappé !",
-    fireball: "{playerName} vous à brûlé !",
-    anvil: "{playerName} vous à écrasé avec une enclume !",
-    fartOn: "{playerName} vous à lâché un pet !",
-    car: "{playerName} vous à écrasé avec une voiture !",
+    piano: "{playerName} vous a jeté un piano !",
+    explosion: "{playerName} vous a fait explosé !",
+    lightning: "{playerName} vous a foudroyé !",
+    punchMachine: "{playerName} vous a frappé !",
+    fireball: "{playerName} vous a brûlé !",
+    anvil: "{playerName} vous a écrasé avec une enclume !",
+    fartOn: "{playerName} vous a lâché un pet !",
+    car: "{playerName} vous a écrasé avec une voiture !",
 }
 
 const lauchPopup = async (
-    playerName: string,
+    attackerId: number,
     motionName: keyof typeof motions
-) => 
+) => {
+    const attacker = WA.players.get(attackerId) as RemotePlayerInterface
     WA.ui.displayActionMessage({
-        message: messages[motionName].replace("{playerName}", playerName),
+        message: messages[motionName].replace("{playerName}", attacker.name),
         callback: () => {
         }
     });
+}

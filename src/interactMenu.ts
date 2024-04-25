@@ -13,6 +13,7 @@ export const actions: Action[] = [
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
                 motionName: "explosion",
+                attackerId: WA.player.playerId
             });
         }
     },
@@ -22,6 +23,7 @@ export const actions: Action[] = [
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
                 motionName: "piano",
+                attackerId: WA.player.playerId
             });
         }
     },
@@ -31,6 +33,7 @@ export const actions: Action[] = [
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
                 motionName: "punchMachine",
+                attackerId: WA.player.playerId
             });
         }
     },
@@ -40,6 +43,7 @@ export const actions: Action[] = [
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
                 motionName: "anvil",
+                attackerId: WA.player.playerId
             });
         }
     },
@@ -49,6 +53,7 @@ export const actions: Action[] = [
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
                 motionName: "lightning",
+                attackerId: WA.player.playerId
             });
         }
     },
@@ -58,6 +63,7 @@ export const actions: Action[] = [
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
                 motionName: "fireball",
+                attackerId: WA.player.playerId
             });
         }
     },
@@ -67,15 +73,17 @@ export const actions: Action[] = [
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
                 motionName: "fartOn",
+                attackerId: WA.player.playerId
             });
         }
     },
     {
-        name: 'craché l\'auto ! 🚗',
+        name: 'Craché l\'auto ! 🚗',
         callback: (remotePlayer) => {
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
                 motionName: "car",
+                attackerId: WA.player.playerId
             });
         }
     },
