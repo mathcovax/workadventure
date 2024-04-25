@@ -35,11 +35,11 @@ export const actions: Action[] = [
         }
     },
     {
-        name: 'Enclume !',
+        name: 'Mange ça ! 🔨',
         callback: (remotePlayer) => {
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
-                motionName: "enclume",
+                motionName: "anvil",
             });
         }
     },

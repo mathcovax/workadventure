@@ -156,7 +156,7 @@ export const motions = {
         )
     },
 
-    enclume: (
+    anvil: (
         player: RemotePlayerInterface,
         tilesId: Awaited<ReturnType<typeof findTilesId>>
     ) => {
@@ -168,7 +168,7 @@ export const motions = {
         }
 
         WA.room.setTiles([
-            {x, y, tile: tilesId.enclume.firstgid, layer: "rage"}
+            {x, y, tile: tilesId.anvil.firstgid, layer: "rage"}
         ])
 
         setTimeout(

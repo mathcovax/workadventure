@@ -1,10 +1,10 @@
 export default {
     "columns":10,
-    "image":"_assets_\/enclume.png",
+    "image":"_assets_\/anvil.png",
     "imageheight":96,
     "imagewidth":320,
     "margin":0,
-    "name":"enclume",
+    "name":"anvil",
     "spacing":0,
     "tilecount":10,
     "tileheight":96,

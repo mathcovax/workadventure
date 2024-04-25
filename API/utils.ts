@@ -4,7 +4,7 @@ import explosionTile from "./tiles/explosion.tile";
 import lightningTile from "./tiles/lightning.tile";
 import punchMachineTile from "./tiles/punch_machine.tile";
 import fireballTile from "./tiles/fireball.tile";
-import enclumeTile from "./tiles/enclume.tile";
+import anvilTile from "./tiles/anvil.tile";
 
 export function animatedTileset(tileset){
     let firstgid = tileset.firstgid + tileset.tilecount
@@ -34,7 +34,7 @@ export function animatedTileset(tileset){
             firstgid: firstgid += punchMachineTile.tilecount
         },
         {
-            ...enclumeTile,
+            ...anvilTile,
             firstgid: firstgid += fireballTile.tilecount,
         }
     ]
