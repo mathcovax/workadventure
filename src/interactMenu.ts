@@ -8,7 +8,7 @@ interface Action {
 
 export const actions: Action[] = [
     {
-        name: 'Macron, EXPLOSION!', 
+        name: 'Macron, EXPLOSION ! 💥',
         callback: (remotePlayer) => {
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
@@ -17,7 +17,7 @@ export const actions: Action[] = [
         }
     },
     {
-        name: 'Piano piano!',
+        name: 'Piano piano ! 🎹',
         callback: (remotePlayer) => {
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
@@ -26,12 +26,22 @@ export const actions: Action[] = [
         }
     },
     {
-        name: 'Enclume!',
+        name: 'John Cena ! 🥊',
+        callback: (remotePlayer) => {
+            WA.event.broadcast("motions", {
+                playerId: remotePlayer.playerId,
+                motionName: "punchMachine",
+            });
+        }
+    },
+    {
+        name: 'Enclume !',
         callback: (remotePlayer) => {
             
         }
-    },{
-    name: 'Attaque éclair',
+    },
+    {
+        name: 'Attaque éclair ! ⚡️',
         callback: (remotePlayer) => {
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
