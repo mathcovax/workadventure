@@ -30,6 +30,14 @@ export const actions: Action[] = [
         callback: (remotePlayer) => {
             
         }
+    },{
+    name: 'Attaque éclair',
+        callback: (remotePlayer) => {
+            WA.event.broadcast("motions", {
+                playerId: remotePlayer.playerId,
+                motionName: "lightning",
+            });
+        }
     }
 
 ]
