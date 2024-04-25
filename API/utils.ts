@@ -6,6 +6,7 @@ import punchMachineTile from "./tiles/punch_machine.tile";
 import fireballTile from "./tiles/fireball.tile";
 import anvilTile from "./tiles/anvil.tile";
 import fartOnTile from "./tiles/fart_on.tile";
+import carTile from "./tiles/car.tile";
 
 export function animatedTileset(tileset){
     let firstgid = tileset.firstgid + tileset.tilecount
@@ -41,6 +42,10 @@ export function animatedTileset(tileset){
         {
             ...fartOnTile,
             firstgid: firstgid += anvilTile.tilecount,
+        },
+        {
+            ...carTile,
+            firstgid: firstgid += carTile.tilecount,
         },
     ]
 }

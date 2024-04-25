@@ -24,6 +24,7 @@ export async function findTilesId(){
     const fireball: Tileset = map.tilesets.find(tileset => tileset.name === "fireball")
     const anvil: Tileset = map.tilesets.find(tileset => tileset.name === "anvil")
     const fartOn: Tileset = map.tilesets.find(tileset => tileset.name === "fart_on")
+    const car: Tileset = map.tilesets.find(tileset => tileset.name === "car")
     
     if(
         !piano || 
@@ -31,6 +32,8 @@ export async function findTilesId(){
         !explosion || 
         !lightning || 
         !punchMachine ||
+        !anvil ||
+        !fireball ||
         !fartOn
     ){
         throw new Error("tileset not found");
@@ -45,5 +48,6 @@ export async function findTilesId(){
         fireball,
         anvil,
         fartOn,
+        car,
     }
 }

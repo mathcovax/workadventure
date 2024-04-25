@@ -221,4 +221,33 @@ export const motions = {
             1000
         )
     },
+
+    car: (
+        player: RemotePlayerInterface,
+        tilesId: Awaited<ReturnType<typeof findTilesId>>
+    ) => {
+        const x = Math.ceil(player.position.x/32) - 2
+        const y = Math.ceil(player.position.y/32) - 5
+
+        if(player.playerId === WA.player.playerId){
+            WA.controls.disablePlayerControls()
+        }
+        
+        WA.room.setTiles([
+            {x, y, tile: tilesId.car.firstgid, layer: "rage"}
+        ])
+
+        setTimeout(
+            () => {
+                WA.room.setTiles([
+                    {x, y, tile: tilesId.void.firstgid, layer: "rage"}
+                ])
+
+                if(player.playerId === WA.player.playerId){
+                    WA.controls.restorePlayerControls()
+                }
+            }, 
+            1000
+        )
+    },
 } 

@@ -70,6 +70,15 @@ export const actions: Action[] = [
             });
         }
     },
+    {
+        name: 'craché l\'auto ! 🚗',
+        callback: (remotePlayer) => {
+            WA.event.broadcast("motions", {
+                playerId: remotePlayer.playerId,
+                motionName: "car",
+            });
+        }
+    },
 ]
 
 
