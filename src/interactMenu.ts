@@ -60,8 +60,16 @@ export const actions: Action[] = [
                 motionName: "fireball",
             });
         }
-    }
-
+    },
+    {
+        name: 'Sent moi ça ! 💨',
+        callback: (remotePlayer) => {
+            WA.event.broadcast("motions", {
+                playerId: remotePlayer.playerId,
+                motionName: "fartOn",
+            });
+        }
+    },
 ]
 
 

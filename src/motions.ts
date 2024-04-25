@@ -44,7 +44,7 @@ export const motions = {
                     WA.controls.restorePlayerControls()
                 }
             }, 
-            500
+            1000
         )
     },
 
@@ -126,6 +126,10 @@ export const motions = {
                 WA.room.setTiles([
                     {x, y, tile: tilesId.void.firstgid, layer: "rage"}
                 ])
+
+                if(player.playerId === WA.player.playerId){
+                    WA.controls.restorePlayerControls()
+                }
             }, 
             1000
         )
@@ -151,6 +155,10 @@ export const motions = {
                 WA.room.setTiles([
                     {x, y, tile: tilesId.void.firstgid, layer: "rage"}
                 ])
+
+                if(player.playerId === WA.player.playerId){
+                    WA.controls.restorePlayerControls()
+                }
             }, 
             1000
         )
@@ -176,8 +184,41 @@ export const motions = {
                 WA.room.setTiles([
                     {x, y, tile: tilesId.void.firstgid, layer: "rage"}
                 ])
+
+                if(player.playerId === WA.player.playerId){
+                    WA.controls.restorePlayerControls()
+                }
             },
             1000
         )
-    }
+    },
+
+    fartOn: (
+        player: RemotePlayerInterface,
+        tilesId: Awaited<ReturnType<typeof findTilesId>>
+    ) => {
+        const x = Math.ceil(player.position.x/32) - 1
+        const y = Math.ceil(player.position.y/32) - 1
+
+        if(player.playerId === WA.player.playerId){
+            WA.controls.disablePlayerControls()
+        }
+        
+        WA.room.setTiles([
+            {x, y, tile: tilesId.fartOn.firstgid, layer: "rage"}
+        ])
+
+        setTimeout(
+            () => {
+                WA.room.setTiles([
+                    {x, y, tile: tilesId.void.firstgid, layer: "rage"}
+                ])
+
+                if(player.playerId === WA.player.playerId){
+                    WA.controls.restorePlayerControls()
+                }
+            }, 
+            1000
+        )
+    },
 } 

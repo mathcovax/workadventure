@@ -5,6 +5,7 @@ import lightningTile from "./tiles/lightning.tile";
 import punchMachineTile from "./tiles/punch_machine.tile";
 import fireballTile from "./tiles/fireball.tile";
 import anvilTile from "./tiles/anvil.tile";
+import fartOnTile from "./tiles/fart_on.tile";
 
 export function animatedTileset(tileset){
     let firstgid = tileset.firstgid + tileset.tilecount
@@ -36,6 +37,10 @@ export function animatedTileset(tileset){
         {
             ...anvilTile,
             firstgid: firstgid += fireballTile.tilecount,
-        }
+        },
+        {
+            ...fartOnTile,
+            firstgid: firstgid += anvilTile.tilecount,
+        },
     ]
 }
