@@ -28,6 +28,10 @@ export const motions = {
         
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
+            lauchPopup(
+                WA.player.name,
+                "piano"
+            )
         }
 
         WA.room.setTiles([
@@ -48,7 +52,7 @@ export const motions = {
         )
     },
 
-    explotion: (
+    explosion: (
         player: RemotePlayerInterface, 
         tilesId: Awaited<ReturnType<typeof findTilesId>>
     ) => {
@@ -57,6 +61,10 @@ export const motions = {
         
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
+            lauchPopup(
+                WA.player.name,
+                "explosion"
+            )
         }
 
         WA.room.setTiles([
@@ -86,6 +94,10 @@ export const motions = {
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
+            lauchPopup(
+                WA.player.name,
+                "lightning"
+            )
         }
 
         WA.room.setTiles([
@@ -115,6 +127,10 @@ export const motions = {
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
+            lauchPopup(
+                WA.player.name,
+                "punchMachine"
+            )
         }
         
         WA.room.setTiles([
@@ -144,6 +160,10 @@ export const motions = {
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
+            lauchPopup(
+                WA.player.name,
+                "fireball"
+            )
         }
         
         WA.room.setTiles([
@@ -173,6 +193,10 @@ export const motions = {
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
+            lauchPopup(
+                WA.player.name,
+                "anvil"
+            )
         }
 
         WA.room.setTiles([
@@ -251,3 +275,23 @@ export const motions = {
         )
     },
 } 
+}
+
+const messages: Record<keyof typeof motions, string> = {
+    piano: "{playerName} vous à jeté un piano !",
+    explosion: "{playerName} vous à fait explosé !",
+    lightning: "{playerName} vous à foudroyé !",
+    punchMachine: "{playerName} vous à frappé !",
+    fireball: "{playerName} vous à brûlé !",
+    anvil: "{playerName} vous à écrasé avec une enclume !",
+}
+
+const lauchPopup = async (
+    playerName: string,
+    motionName: keyof typeof motions
+) => 
+    WA.ui.displayActionMessage({
+        message: messages[motionName].replace("{playerName}", playerName),
+        callback: () => {
+        }
+    });

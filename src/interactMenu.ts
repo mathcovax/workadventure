@@ -12,7 +12,7 @@ export const actions: Action[] = [
         callback: (remotePlayer) => {
             WA.event.broadcast("motions", {
                 playerId: remotePlayer.playerId,
-                motionName: "explotion",
+                motionName: "explosion",
             });
         }
     },
