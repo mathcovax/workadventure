@@ -39,16 +39,16 @@ fastify.get("/*", (request, reply) => {
                 id: 9999999
             }
 
-            const shitLayer = {
+            const shitsLayer = {
                 ...baseTileLayer,
                 data: rageLayer.data,
                 visible: true,
-                name: "shit",
+                name: "shits",
                 id: 9999999
             }
     
             map.layers.push(objectLayer);
-            map.layers.push(shitLayer);
+            map.layers.push(shitsLayer);
             map.layers.push(rageLayer);
     
             const lastTileset = map.tilesets[map.tilesets.length - 1]

@@ -10,7 +10,7 @@ export const objectLayer = {
         {
             height: 0,
             id: 1,
-            name: "tombstone",
+            name: "shits",
             properties:[
                     {
                         name: "default",
