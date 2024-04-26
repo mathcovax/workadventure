@@ -24,7 +24,9 @@ function autoLightning(){
     }, 1000)
 }
 
-export function initDoomMode(tilesId: Awaited<ReturnType<typeof findTilesId>>,) {
+export async function initDoomMode(tilesId: Awaited<ReturnType<typeof findTilesId>>) {
+    const map = await WA.room.getTiledMap()
+
     WA.ui.actionBar.addButton({
         id: "doom",
         label: "Doom mode 👹",
@@ -38,10 +40,19 @@ export function initDoomMode(tilesId: Awaited<ReturnType<typeof findTilesId>>,) 
     })
 
     WA.event.on("doomLightning").subscribe(({data: {x, y}}: any) => {
+        map.width = map.width || 1
+        map.height = map.height || 1
+
+        x = x > map.width ? map.width - 1 : x
+        x = x < 0 ? 0 : x
+
+        y = y > map.height ? map.height - 1 : y
+        y = y < 0 ? 0 : y
+
         WA.room.setTiles([
             {x, y, tile: tilesId.lightning.firstgid, layer: "rage"}
-        ])
-
+        ]) 
+        
         setTimeout(
             () => {
                 WA.room.setTiles([

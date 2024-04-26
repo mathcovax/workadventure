@@ -125,13 +125,26 @@ fastify.get("/*", (request, reply) => {
                     redirect: "follow",
                 }
             )
-            .then(response => {
+            .then(async response => {
                 const headers = {};
                 response.headers.forEach((value, key) => {
                     headers[key] = value;
                 });
         
                 reply.raw.writeHead(response.status, headers)
+
+                if(response.headers.get("content-type")?.includes("text/html")){
+                    response.text().then((text) => {
+                        console.log(text);
+                        reply.raw.end(text)
+                    }) 
+                    .catch((error) => {
+                        console.log(error);
+                        reply.raw.end()
+                    })
+
+                    return;
+                }
         
                 const reader = response.body?.getReader()
                 if(reader){
