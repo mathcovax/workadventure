@@ -31,8 +31,7 @@ fastify.get("/*", (request, reply) => {
                 throw new Error("No base found");
             }
 
-            const lastTileset = map.tilesets[map.tilesets.length - 1]
-            map.tilesets.push(...animatedTileset(lastTileset))
+            map.tilesets.push(...animatedTileset(map.tilesets[map.tilesets.length - 1]))
     
             const rageLayer = {
                 ...baseTileLayer,
@@ -49,28 +48,30 @@ fastify.get("/*", (request, reply) => {
                 name: "shits",
                 id: 9999999
             }
-            
+
+            const lastTileset = map.tilesets[map.tilesets.length - 1];
+
             const bloodLayer = {
                 ...baseTileLayer,
                 data: baseTileLayer.data.map(
-                    (value,index) => {
-                        let randomInt = Math.random();
-                        if (randomInt < 0.1) {
-                            const lastTileset = map.tilesets[map.tilesets.length - 1]
-                            return lastTileset.firstgid + index%4;
-                        }       
-                        return 0;
-                    }
+                    (value, index) => 
+                        Math.random() < 0.1 
+                        ? lastTileset.firstgid + (index % 4) 
+                        : 0
                 ),
                 visible: false,
                 name: "doom",
                 id: 9999999
             }
-    
+
+            const floorLayer = map.layers.findIndex(l => l.name === "floorLayer")
+
+            if(floorLayer === -1){
+                throw new Error("Floor Layer not found");
+            }
+
+            map.layers.splice(floorLayer, 0, bloodLayer, shitsLayer, rageLayer)
             map.layers.push(objectLayer);
-            map.layers.push(shitsLayer);
-            map.layers.push(rageLayer);
-            map.layers.push(bloodLayer);
             
             const property = map.properties.find(p => p.name === "script");
             
