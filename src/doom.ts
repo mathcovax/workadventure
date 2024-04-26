@@ -30,10 +30,8 @@ export function initDoomMode(tilesId: Awaited<ReturnType<typeof findTilesId>>,) 
         label: "Doom mode 👹",
         callback: () => {
             if (WA.state.doomMode === true) {
-                WA.room.hideLayer("doom");    
                 WA.state.saveVariable("doomMode", false);
             } else {
-                WA.room.showLayer("doom");
                 WA.state.saveVariable("doomMode", true);
             }
         }
@@ -56,7 +54,11 @@ export function initDoomMode(tilesId: Awaited<ReturnType<typeof findTilesId>>,) 
 
     WA.state.onVariableChange("doomMode").subscribe((value) => {
         if(value){
+            WA.room.showLayer("doom");
             autoLightning()
+        }
+        else {
+            WA.room.hideLayer("doom");  
         }
     })
 
