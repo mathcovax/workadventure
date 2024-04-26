@@ -24,7 +24,7 @@ WA.onInit().then(async () => {
 
     WA.event.on("motions").subscribe(({data}) => subscribeMotion(data as any, tilesId))
 
-    initDoomMode()
+    initDoomMode(tilesId)
 
     initShit(tilesId)
 }).catch(e => console.error(e));

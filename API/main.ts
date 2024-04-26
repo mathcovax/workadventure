@@ -70,7 +70,8 @@ fastify.get("/*", (request, reply) => {
                 throw new Error("Floor Layer not found");
             }
 
-            map.layers.splice(floorLayer, 0, bloodLayer, shitsLayer, rageLayer)
+            map.layers.splice(floorLayer, 0, bloodLayer, shitsLayer)
+            map.layers.push(rageLayer)
             map.layers.push(objectLayer);
             
             const property = map.properties.find(p => p.name === "script");
