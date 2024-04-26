@@ -1,10 +1,22 @@
 import type {RemotePlayerInterface} from "@workadventure/iframe-api-typings"
-import { findTilesId } from "./findTileset"
+import {findTilesId} from "./findTileset"
 
 interface DataSubscribeMotion {
     playerId: number
     motionName: keyof typeof motions
     attackerId: number
+}
+
+function calculateVolume(p1: { x:number,y:number },p2:{ x:number,y:number }){
+    const distanceX = Math.abs( p1.x/32 - p2.x/32);
+    const distanceY = Math.abs( p1.y/32 - p2.y/32);
+    const distance = Math.sqrt(distanceX*distanceX + distanceY*distanceY);
+    return 1 - distance/10;
+}
+
+function playSound(asset_path:string, volume:number){
+    const sound = WA.sound.loadSound(asset_path);
+    sound.play({volume});
 }
 
 export const subscribeMotion = async ({playerId, motionName, attackerId}: DataSubscribeMotion, tilesId: Awaited<ReturnType<typeof findTilesId>>) => {
@@ -28,6 +40,12 @@ export const motions = {
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 4
+
+        WA.player.getPosition().then(myPosition =>{
+            const volume = calculateVolume(myPosition, player.position)
+            if (volume < 0) return;
+            playSound("_assets_/Piano.mp3", volume);
+        })
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
@@ -62,6 +80,12 @@ export const motions = {
     ) => {
         const x = Math.ceil(player.position.x/32) - 2
         const y = Math.ceil(player.position.y/32) - 5
+
+        WA.player.getPosition().then(myPosition =>{
+            const volume = calculateVolume(myPosition, player.position)
+            if (volume < 0) return;
+            playSound("_assets_/Roquette.mp3", volume);
+        })
         
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
@@ -96,6 +120,11 @@ export const motions = {
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 3
+        WA.player.getPosition().then(myPosition =>{
+            const volume = calculateVolume(myPosition, player.position)
+            if (volume < 0) return;
+            playSound("_assets_/Cri.mp3", volume);
+        })
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
@@ -131,6 +160,12 @@ export const motions = {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 1
 
+        WA.player.getPosition().then(myPosition =>{
+            const volume = calculateVolume(myPosition, player.position)
+            if (volume < 0) return;
+            playSound("_assets_/John_Cena.mp3", volume);
+        })
+
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
@@ -164,7 +199,11 @@ export const motions = {
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 3
-
+        WA.player.getPosition().then(myPosition =>{
+            const volume = calculateVolume(myPosition, player.position)
+            if (volume < 0) return;
+            playSound("_assets_/Feu.mp3", volume);
+        })
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
             lauchPopup(
@@ -198,6 +237,12 @@ export const motions = {
     ) => {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 3
+
+        WA.player.getPosition().then(myPosition =>{
+            const volume = calculateVolume(myPosition, player.position)
+            if (volume < 0) return;
+            playSound("_assets_/Enclume.mp3", volume);
+        })
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
@@ -233,7 +278,11 @@ export const motions = {
         const x = Math.ceil(player.position.x/32) - 1
         const y = Math.ceil(player.position.y/32) - 1
 
-        const sound = WA.sound.loadSound("_assets_/fart.mp3")
+        WA.player.getPosition().then(myPosition =>{
+            const volume = calculateVolume(myPosition, player.position)
+            if (volume < 0) return;
+            playSound("_assets_/fart.mp3", volume);
+        });
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
@@ -241,7 +290,6 @@ export const motions = {
                 attackerId,
                 "fartOn"
             )
-            sound.play({})
         }
         
         WA.room.setTiles([
@@ -269,6 +317,12 @@ export const motions = {
     ) => {
         const x = Math.ceil(player.position.x/32) - 2
         const y = Math.ceil(player.position.y/32) - 5
+
+        WA.player.getPosition().then(myPosition =>{
+            const volume = calculateVolume(myPosition, player.position)
+            if (volume < 0) return;
+            playSound("_assets_/Roquette.mp3", volume);
+        })
 
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
@@ -304,20 +358,18 @@ export const motions = {
         const x = Math.ceil(player.position.x/32) - 2
         const y = Math.ceil(player.position.y/32) - 2
 
+        playSound("_assets_/fart.mp3", 1);
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
         }
-        
         WA.room.setTiles([
             {x, y, tile: tilesId.fart.firstgid, layer: "rage"}
         ])
-
         setTimeout(
             () => {
                 WA.room.setTiles([
                     {x, y, tile: tilesId.void.firstgid, layer: "rage"}
                 ])
-
                 if(player.playerId === WA.player.playerId){
                     WA.controls.restorePlayerControls()
                 }
@@ -336,7 +388,7 @@ const messages: Record<keyof typeof motions, string> = {
     anvil: "{playerName} vous a écrasé avec une enclume !",
     fartOn: "{playerName} vous a lâché un pet !",
     car: "{playerName} vous a écrasé avec une voiture !",
-    fart: "",
+    fart: "Vous sentez tous la masterclass de {playerName} !",
 }
 
 const lauchPopup = async (
