@@ -11,6 +11,11 @@ function createShit(
     tilesets: Awaited<ReturnType<typeof findTilesId>>, 
     shit: Shit
 ){
+    WA.ui.displayActionMessage({
+        message: `${shit.ownerName} a posé un classique.`,
+        callback: () => {}
+    })
+
     WA.room.setTiles([
         {
             x: shit.x - 1,
