@@ -358,7 +358,7 @@ export const motions = {
         const x = Math.ceil(player.position.x/32) - 2
         const y = Math.ceil(player.position.y/32) - 2
 
-        playSound("_assets_/fart.mp3", 1);
+        playSound("_assets_/Fart_global.mp3", 1);
         if(player.playerId === WA.player.playerId){
             WA.controls.disablePlayerControls()
         }
